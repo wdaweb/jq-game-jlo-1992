@@ -1,0 +1,62 @@
+#levels-menu {
+  background-color: rgba(232, 203, 73, 0.5);
+  /* background: url('./images/volleyballball.png') no-repeat center/120%; */
+  /* border: 10px solid #fccd0b; */
+  width: 30%;
+  height: 45%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  z-index: 2;
+  display: none;
+
+  .level-ball {
+    width: 17%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+  }
+
+  .level-ball:nth-of-type(2) {
+    top: 39%;
+    left: 5%;
+  }
+
+  .level-ball:nth-of-type(3) {
+    top: 68%;
+    left: 5%;
+  }
+}
+
+.level {
+  background: linear-gradient(90deg, #120e3f, #493dc5 80%);
+  /* background: url('./images/volleyballball.png') no-repeat center/70%; */
+  width: 85%;
+  height: 23%;
+  line-height: 235%;
+  color: white;
+  position: absolute;
+  border-radius: 20px;
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  top: 11%;
+  left: 8%;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+}
+
+.level:hover {
+  background: #483dc5ad;
+}
+
+.level:nth-of-type(2) {
+  top: 40%;
+}
+
+.level:nth-of-type(3) {
+  top: 69%;
+}

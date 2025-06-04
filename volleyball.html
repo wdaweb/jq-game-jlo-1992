@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>passing game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/rankings.css">
+  <link rel="stylesheet" href="./css/levels.css">
+  <link rel="stylesheet" href="./css/scoringboard.css">
+  <style>
+    #container {
+      background: url('./images/court2.jpg') no-repeat center/cover;
+      overflow: hidden;
+      height: 100vh;
+      margin-left: 0;
+      padding-bottom: 8px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #game {
+      height: 40%;
+      /* width: 1230px; */
+      width: 100%;
+      /* background-color: rgba(0, 0, 0, 0.8); */
+      position: absolute;
+      /* top: 342px; */
+      top: 60%;
+      /* cursor: none; */
+    }
+
+    .niceup {
+      width: 6%;
+      position: absolute;
+    }
+
+    .ball {
+      width: 65px;
+      position: absolute;
+      user-select: none;
+      -webkit-user-drag: none;
+      /* top: -71%;
+      left: 25%; */
+      z-index: 2;
+    }
+
+    #start-btn,
+    #levels-btn,
+    #rankings-btn {
+      height: 13%;
+      width: 20%;
+      border: none;
+      /* background: radial-gradient(#ffc100, #ffa900); */
+      background: linear-gradient(45deg, #e8cb49, #fcc90c 80%);
+      color: transparent;
+      border: 4px solid #fcc90c;
+      background-clip: text;
+      font-weight: bold;
+      font-size: 45px;
+      border-radius: 40px;
+      line-height: 7%;
+      /* font-family: "Anton", sans-serif; */
+      font-family: "Rubik", sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      /* margin-top: 10px; */
+      cursor: pointer;
+    }
+
+    #levels-btn {
+      left: 27%;
+    }
+
+    #rankings-btn {
+      left: 73%;
+    }
+
+    #start-btn:hover,
+    #levels-btn:hover,
+    #rankings-btn:hover {
+      background: #fbd80c;
+      color: white;
+      border: none;
+    }
+
+    #player {
+      position: absolute;
+      width: 300px;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="scoring-board">
+      <table>
+        <tr>
+          <th>YOUR SCORE</th>
+          <th>TIME</th>
+          <th>HIGHEST SCORE</th>
+        </tr>
+        <tr>
+          <td id="score">0</td>
+          <td id="time-left">00</td>
+          <td id="high-score">0</td>
+        </tr>
+      </table>
+    </div>
+    <div id="btns">
+      <button id="start-btn">START</button>
+      <button id="levels-btn">LEVELS</button>
+      <button id="rankings-btn">RANKINGS</button>
+    </div>
+
+    <div id="levels-menu">
+      <div class="level">Professional</div>
+      <img class="level-ball" src="./images/volleyballball.png">
+      <div class="level">Intermediate</div>
+      <img class="level-ball" src="./images/volleyballball.png">
+      <div class="level">Beginner</div>
+      <img class="level-ball" src="./images/volleyballball.png">
+    </div>
+
+    <div id="rankings-menu">
+      <h1>Rankings</h1>
+      <div id="close-btn">X</div>
+      <div class="ranking-info-group">
+        <div class="ranking-info">
+          <div class="rank">1</div>
+          <div class="rank-name">You-know-who</div>
+          <div class="rank-score">0</div>
+        </div>
+        <div class="ranking-info">
+          <div class="rank">2</div>
+          <div class="rank-name">You-know-who</div>
+          <div class="rank-score">0</div>
+        </div>
+        <div class="ranking-info">
+          <div class="rank">3</div>
+          <div class="rank-name">You-know-who</div>
+          <div class="rank-score">0</div>
+        </div>
+        <div class="ranking-info">
+          <div class="rank">4</div>
+          <div class="rank-name">You-know-who</div>
+          <div class="rank-score">0</div>
+        </div>
+        <div class="ranking-info">
+          <div class="rank">5</div>
+          <div class="rank-name">You-know-who</div>
+          <div class="rank-score">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="game">
+      <!-- <img class="niceup" src="./images/niceup.png"> -->
+      <!-- <img src="./images/passing.png" id="player"> -->
+      <!-- <img src="./images/real-ball.png" class="ball"> -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+    integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+    crossorigin='anonymous'></script>
+  <!-- sweetalert2  -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./js/playerMove.js"></script>
+  <script src="./js/levels.js"></script>
+  <script src="./js/digBall.js"></script>
+  <script src="./js/mainBtns.js"></script>
+  <script src="./js/startGame.js"></script>
+
+  <script>
+
+
+
+  </script>
+</body>
+
+</html>

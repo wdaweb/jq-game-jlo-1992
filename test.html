@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #game {
+      width: 400px;
+      height: 600px;
+      background: #eef;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #ball {
+      width: 60px;
+      height: 60px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      left: 170px;
+      transition: bottom 0.3s ease-out;
+      cursor: pointer;
+    }
+
+    #score {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game">
+    <div id="ball"></div>
+    <div id="score">得分：0</div>
+  </div>
+
+  <script>
+    const ball = document.getElementById("ball");
+    const scoreLabel = document.getElementById("score");
+    let score = 0;
+    let velocity = 0;
+    let position = 0; // bottom px
+    let gravity = -1.5;
+    let bouncing = false;
+
+    ball.addEventListener("click", () => {
+      if (bouncing) return;
+      score++;
+      scoreLabel.textContent = "得分：" + score;
+      velocity = 20;
+      bouncing = true;
+    });
+
+    function animate() {
+      if (bouncing) {
+        velocity += gravity;
+        position += velocity;
+
+        if (position <= 0) {
+          position = 0;
+          velocity = 0;
+          bouncing = false;
+        }
+
+        ball.style.bottom = position + "px";
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+
+</html>

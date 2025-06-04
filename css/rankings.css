@@ -1,0 +1,57 @@
+#rankings-menu {
+  background-color: rgba(62, 69, 149);
+  width: 30%;
+  height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  z-index: 2;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+  display: none;
+
+  #close-btn {
+    background-color: #e8cb49;
+    position: absolute;
+    left: 90%;
+    top: -2%;
+    color: white;
+    width: 8%;
+    height: 8%;
+    line-height: 145%;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: inset 1px 1px 5px #7c6c26, 1px 1px 5px #7c6c26;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    margin: 10px;
+    text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .ranking-info {
+    width: 90%;
+    height: 15%;
+    margin: auto;
+    font-size: 30px;
+    color: white;
+    background: #e8cb49;
+    border-radius: 20px;
+    line-height: 220%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .ranking-info-group {
+    height: 83%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
