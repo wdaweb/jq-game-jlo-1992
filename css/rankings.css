@@ -27,31 +27,54 @@
     box-shadow: inset 1px 1px 5px #7c6c26, 1px 1px 5px #7c6c26;
   }
 
+  #close-btn:hover {
+    background-color: #f1db77;
+  }
+
   h1 {
     text-align: center;
     font-size: 50px;
     color: white;
     margin: 10px;
-    text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
   }
 
   .ranking-info {
     width: 90%;
-    height: 15%;
+    height: 13%;
     margin: auto;
+    text-align: center;
     font-size: 30px;
     color: white;
+    position: absolute;
     background: #e8cb49;
     border-radius: 20px;
+    left: 5%;
     line-height: 220%;
     display: flex;
     justify-content: space-around;
+    top: 81%;
   }
 
-  .ranking-info-group {
-    height: 83%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  .ranking-info:nth-of-type(2) {
+    top: 16%;
+  }
+
+  .ranking-info:nth-of-type(3) {
+    top: 32%;
+  }
+
+  .ranking-info:nth-of-type(4) {
+    top: 48%;
+  }
+
+  .ranking-info:nth-of-type(5) {
+    top: 64%;
+  }
+
+  .rank-name {
+    width: 350px;
+  }
+  .rank-score {
+    width: 50px;
   }
 }

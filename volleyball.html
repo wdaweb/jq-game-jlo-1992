@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./css/rankings.css">
+  <link rel="stylesheet" href="./css/scoringBoard.css">
   <link rel="stylesheet" href="./css/levels.css">
-  <link rel="stylesheet" href="./css/scoringboard.css">
+  <link rel="stylesheet" href="./css/rankings.css">
+  <link rel="stylesheet" href="./css/btns.css">
   <style>
     #container {
       background: url('./images/court2.jpg') no-repeat center/cover;
@@ -47,50 +48,7 @@
       position: absolute;
       user-select: none;
       -webkit-user-drag: none;
-      /* top: -71%;
-      left: 25%; */
       z-index: 2;
-    }
-
-    #start-btn,
-    #levels-btn,
-    #rankings-btn {
-      height: 13%;
-      width: 20%;
-      border: none;
-      /* background: radial-gradient(#ffc100, #ffa900); */
-      background: linear-gradient(45deg, #e8cb49, #fcc90c 80%);
-      color: transparent;
-      border: 4px solid #fcc90c;
-      background-clip: text;
-      font-weight: bold;
-      font-size: 45px;
-      border-radius: 40px;
-      line-height: 7%;
-      /* font-family: "Anton", sans-serif; */
-      font-family: "Rubik", sans-serif;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      /* margin-top: 10px; */
-      cursor: pointer;
-    }
-
-    #levels-btn {
-      left: 27%;
-    }
-
-    #rankings-btn {
-      left: 73%;
-    }
-
-    #start-btn:hover,
-    #levels-btn:hover,
-    #rankings-btn:hover {
-      background: #fbd80c;
-      color: white;
-      border: none;
     }
 
     #player {
@@ -98,6 +56,11 @@
       width: 300px;
       pointer-events: none;
       z-index: 1;
+    }
+
+    .new-entry {
+      background-color: gold;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -110,18 +73,29 @@
           <th>YOUR SCORE</th>
           <th>TIME</th>
           <th>HIGHEST SCORE</th>
+          <th>LEVEL</th>
         </tr>
         <tr>
           <td id="score">0</td>
           <td id="time-left">00</td>
           <td id="high-score">0</td>
+          <td id="currentLevel"></td>
         </tr>
       </table>
     </div>
     <div id="btns">
-      <button id="start-btn">START</button>
-      <button id="levels-btn">LEVELS</button>
-      <button id="rankings-btn">RANKINGS</button>
+      <a href="javascript: void(0)" class="btn" id="levels-btn">
+        LEVELS
+        <span></span><span></span><span></span><span></span>
+      </a>
+      <a href="javascript: void(0)" class="btn" id="start-btn">
+        START
+        <span></span><span></span><span></span><span></span>
+      </a>
+      <a href="javascript: void(0)" class="btn" id="rankings-btn">
+        RANKINGS
+        <span></span><span></span><span></span><span></span>
+      </a>
     </div>
 
     <div id="levels-menu">
@@ -136,32 +110,30 @@
     <div id="rankings-menu">
       <h1>Rankings</h1>
       <div id="close-btn">X</div>
-      <div class="ranking-info-group">
-        <div class="ranking-info">
-          <div class="rank">1</div>
-          <div class="rank-name">You-know-who</div>
-          <div class="rank-score">0</div>
-        </div>
-        <div class="ranking-info">
-          <div class="rank">2</div>
-          <div class="rank-name">You-know-who</div>
-          <div class="rank-score">0</div>
-        </div>
-        <div class="ranking-info">
-          <div class="rank">3</div>
-          <div class="rank-name">You-know-who</div>
-          <div class="rank-score">0</div>
-        </div>
-        <div class="ranking-info">
-          <div class="rank">4</div>
-          <div class="rank-name">You-know-who</div>
-          <div class="rank-score">0</div>
-        </div>
-        <div class="ranking-info">
-          <div class="rank">5</div>
-          <div class="rank-name">You-know-who</div>
-          <div class="rank-score">0</div>
-        </div>
+      <div class="ranking-info">
+        <span class="rank">1</span>
+        <span class="rank-name">NOBODY</span>
+        <span class="rank-score">1</span>
+      </div>
+      <div class="ranking-info">
+        <span class="rank">2</span>
+        <span class="rank-name">NOBODY</span>
+        <span class="rank-score">1</span>
+      </div>
+      <div class="ranking-info">
+        <span class="rank">3</span>
+        <span class="rank-name">NOBODY</span>
+        <span class="rank-score">1</span>
+      </div>
+      <div class="ranking-info">
+        <span class="rank">4</span>
+        <span class="rank-name">NOBODY</span>
+        <span class="rank-score">1</span>
+      </div>
+      <div class="ranking-info">
+        <span class="rank">5</span>
+        <span class="rank-name">NOBODY</span>
+        <span class="rank-score">1</span>
       </div>
     </div>
 
@@ -169,6 +141,7 @@
       <!-- <img class="niceup" src="./images/niceup.png"> -->
       <!-- <img src="./images/passing.png" id="player"> -->
       <!-- <img src="./images/real-ball.png" class="ball"> -->
+      <div id="countdown"></div>
     </div>
   </div>
 
@@ -178,13 +151,135 @@
     crossorigin='anonymous'></script>
   <!-- sweetalert2  -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="./js/playerMove.js"></script>
-  <script src="./js/levels.js"></script>
   <script src="./js/digBall.js"></script>
-  <script src="./js/mainBtns.js"></script>
-  <script src="./js/startGame.js"></script>
-
+  <script src="./js/btns.js"></script>
+  <script src="./js/rankings.js"></script>
+  <script src="./js/levels.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js'
+    integrity='sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=='
+    crossorigin='anonymous'></script>
   <script>
+    const GAME_TIME = 5;
+    let score = 0;
+    let timeLeft = 0;
+    let timer = 0;
+    const highScore = { name: '', score: 0 }
+    let generateBallTimer;
+    const levelSetting = LEVELS[currentLevel];
+    $("#currentLevel").text(currentLevel);
+
+    updateRankings()
+
+    // 開始按鈕
+    $('#start-btn').on('click', function () {
+      // 把 player 及 滑鼠綁定事件都刪除，才不會重複綁定造成畫面問題
+      resetGame()
+      // 綁定球員事件
+      playerMove()
+      $(this).attr('disabled', true)
+      $('#btns').css('display', 'none')
+      $('#game').css('cursor', 'none')
+      score = 0;
+      $('#score').text(score)
+      timeLeft = GAME_TIME
+      $('#time-left').text(timeLeft)
+      generateBallTimer = setInterval(generateBall, levelSetting.generateBallInterval)
+
+      timer = setInterval(function () {
+        timeLeft--
+        $('#time-left').text(timeLeft)
+
+        // 時間到取消計時器
+        if (timeLeft === 0) {
+          clearInterval(timer)
+          clearInterval(generateBallTimer)
+          $('#start-btn').attr('disabled', false)
+          // $('#levels-btn').css('display', 'block')
+          // $('#rankings-btn').css('display', 'block')
+          $('#btns').css('display', 'block')
+          $('#game').empty()
+
+          const lowestRankingScore = rankings[rankings.length - 1].score
+
+          if (score > lowestRankingScore) {
+            Swal.fire({
+              title: "你進排行榜啦！",
+              text: 'please enter your name',
+              input: 'text',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            })
+              .then(result => {
+                const name = result.value || 'You-Know-Who'
+                // 插入新紀錄
+                rankings.push({ name, score })
+                // 排序分數由高至低
+                rankings.sort((a, b) => { return b.score - a.score })
+                // 保留前五名
+                rankings = rankings.slice(0, 5)
+                localStorage.setItem('rankings', JSON.stringify(rankings))
+                // 更新畫面
+                updateChart(name, score)
+                $('#rankings-menu').css('display', 'block');
+                // 同步 highScore 顯示
+                $('#high-score').text(rankings[0].score)
+                score = 0;
+                $('#score').text(score)
+              })
+
+          }
+        }
+      }, 1000)
+    })
+
+    let playerCreated = false
+    let mouseMove = false
+
+    function playerMove() {
+      // 確認每次重新開始遊戲，前一次的 player 已經移除，才再創建一個新的 player
+      if (!playerCreated) {
+        $('#player').remove()
+        $('#game').append('<img src="./images/koga.png" id="player">')
+        playerCreated = true
+      }
+      if (!mouseMove) {
+        // 限制 player 只能在遊戲區間
+        $('#game').on('mousemove', function (event) {
+          const gameOffset = $('#game').offset()
+          const left = event.pageX - gameOffset.left - 35
+          const top = event.pageY - gameOffset.top - 50
+          $('#player').css({
+            left: left + 'px',
+            top: top + 'px'
+          })
+
+          // 根據滑鼠位置控制旋轉角度
+          const gameWidth = $('#game').width()
+          if (left < gameWidth / 2) {
+            $('#player').css({
+              transform: 'rotateY(0deg)'
+
+            });
+          } else if (left > gameWidth / 2) {
+            $('#player').css({
+              transform: 'rotateY(180deg)',
+              left: left - 140 + 'px',
+            })
+          }
+        })
+        mouseMove = true
+      }
+    }
+
+    function resetGame() {
+      $('#player').remove()
+      playerCreated = false
+      mouseMove = false
+      $('#game').off('mouseremove')
+    }
+
+
+
 
 
 

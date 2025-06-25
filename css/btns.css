@@ -1,0 +1,80 @@
+#start-btn,
+#levels-btn,
+#rankings-btn {
+  height: 13%;
+  width: 20%;
+  background: linear-gradient(45deg, #e8cb49, #fcc90c 80%);
+  color: transparent;
+  border: 6px solid #fcc90c;
+  background-clip: text;
+  font-weight: bold;
+  font-size: 45px;
+  border-radius: 40px;
+  line-height: 162%;
+  /* font-family: "Anton", sans-serif; */
+  font-family: "Rubik", sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* margin-top: 10px; */
+  cursor: pointer;
+  z-index: 1;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* position: relative; */
+  min-width: 200px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1s;
+  padding: 10px 10px;
+}
+
+#levels-btn {
+  left: 24%;
+}
+
+#rankings-btn {
+  left: 76%;
+}
+
+#start-btn:hover,
+#levels-btn:hover,
+#rankings-btn:hover {
+  color: white;
+  border: none;
+}
+
+.btn span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: #fbd80c;
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+.btn:hover span {
+  transform: translateY(0) scale(2);
+}
+
+.btn span:nth-child(1) {
+  --n: 1;
+}
+
+.btn span:nth-child(2) {
+  --n: 2;
+}
+
+.btn span:nth-child(3) {
+  --n: 3;
+}
+
+.btn span:nth-child(4) {
+  --n: 4;
+}

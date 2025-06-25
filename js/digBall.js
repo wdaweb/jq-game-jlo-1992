@@ -39,7 +39,7 @@ $("#game").on("mousemove", function (event) {
       $("#game").append(niceUpWords);
       const niceUp = setTimeout(function () {
         $(".niceup").fadeOut(300, function () {
-          niceUpWords.remove();
+          niceUp.remove();
         });
       }, 600);
 
@@ -51,28 +51,3 @@ $("#game").on("mousemove", function (event) {
     }
   });
 });
-
-// 點擊讓球彈起並消失
-// $('#game').on('click', '.ball', function () {
-//   const ball = $(this)
-//   const gameWidth = $('#game').width()
-//   ball.stop()
-//   let top = parseInt(ball.css('top'))
-//   let left = parseInt(ball.css('left'))
-//   let vy = -30
-//   let vx = (Math.random() < 0.5 ? -1 : 1) * Math.round(Math.random() * 10 + 1)
-//   let gravity = 0.8
-
-//   const interval = setInterval(function () {
-//     vy += gravity
-//     top += vy
-//     left += vx
-//     ball.css({ top: `${top}px`, left: `${left}px` })
-//   }, 20)
-
-//   score++
-//   $('#score').text(score)
-//   setTimeout(function () {
-//     ball.remove()
-//   }, 600
-// })

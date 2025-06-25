@@ -60,3 +60,42 @@
 .level:nth-of-type(3) {
   top: 69%;
 }
+
+/* 手機尺寸 */
+@media (max-width: 600px) {
+  #levels-menu {
+    width: 90%;
+    height: 65%;
+    border-radius: 12px;
+    padding: 10px 0;
+  }
+  .level {
+    font-size: 18px;
+    height: 28%;
+    line-height: 180%;
+    border-radius: 10px;
+    left: 5%;
+    width: 90%;
+  }
+  .level-ball {
+    width: 30%;
+    left: 2%;
+  }
+}
+
+/* 響應式設計：平板 */
+@media (max-width: 900px) {
+  #levels-menu {
+    width: 60%;
+    height: 55%;
+    border-radius: 20px;
+  }
+  .level {
+    font-size: 28px;
+    height: 25%;
+    line-height: 200%;
+  }
+  .level-ball {
+    width: 22%;
+  }
+}
