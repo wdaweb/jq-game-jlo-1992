@@ -78,3 +78,24 @@
     width: 50px;
   }
 }
+
+@media (max-width: 600px) {
+  #rankings-menu {
+    width: 90%;
+    height: 70%;
+    border-radius: 15px;
+  }
+  .ranking-info {
+    font-size: 20px;
+    line-height: 180%;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  #rankings-menu {
+    width: 60%;
+    height: 65%;
+  }
+  .ranking-info {
+    font-size: 25px;
+  }
+}

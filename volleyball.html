@@ -12,11 +12,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./css/scoringBoard.css">
+  <link rel="stylesheet" href="./css/scoreBoard.css">
   <link rel="stylesheet" href="./css/levels.css">
   <link rel="stylesheet" href="./css/rankings.css">
   <link rel="stylesheet" href="./css/btns.css">
   <style>
+    body {
+      overflow: hidden;
+    }
+
     #container {
       background: url('./images/court2.jpg') no-repeat center/cover;
       overflow: hidden;
@@ -25,26 +29,52 @@
       padding-bottom: 8px;
       user-select: none;
       -webkit-user-drag: none;
+      position: relative;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      display: none;
     }
 
     #game {
       height: 40%;
-      /* width: 1230px; */
       width: 100%;
       /* background-color: rgba(0, 0, 0, 0.8); */
       position: absolute;
-      /* top: 342px; */
       top: 60%;
-      /* cursor: none; */
     }
 
-    .niceup {
+    @media (max-width: 600px) {
+      #game {
+        height: 50%;
+        /* 比預設 40% 稍高以確保球有空間彈跳 */
+        top: 50%;
+        /* 確保球區塊在螢幕中段 */
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      #game {
+        height: 45%;
+        top: 55%;
+      }
+    }
+
+
+    .words {
       width: 6%;
       position: absolute;
     }
 
     .ball {
-      width: 65px;
+      width: 70px;
       position: absolute;
       user-select: none;
       -webkit-user-drag: none;
@@ -58,31 +88,85 @@
       z-index: 1;
     }
 
+    @media (max-width: 600px) {
+      .ball {
+        width: 50px;
+      }
+
+      #player {
+        width: 150px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .ball {
+        width: 60px;
+      }
+
+      #player {
+        width: 220px;
+      }
+    }
+
     .new-entry {
       background-color: gold;
       border-radius: 10px;
+    }
+
+    #countdown {
+      color: #fcc90c;
+      font-weight: bold;
+      font-size: 8rem;
+      font-family: "Rubik", sans-serif;
+      margin: 10% auto;
+      width: 100%;
+      text-shadow:
+        1px 1px 0 #3b3b3b,
+        2px 2px 0 #3b3b3b,
+        3px 3px 0 #3b3b3b,
+        4px 4px 0 #3b3b3b,
+        5px 5px 0 #3b3b3b,
+        6px 6px 0 #3b3b3b,
+        7px 7px 0 #3b3b3b,
+        8px 8px 0 #3b3b3b,
+        9px 9px 0 #3b3b3b,
+        10px 10px 0 #3b3b3b;
+      text-align: center;
+      z-index: 2;
+      position: absolute;
+    }
+
+    @media (max-width: 600px) {
+      #countdown {
+        font-size: 4rem;
+      }
     }
   </style>
 </head>
 
 <body>
   <div id="container">
-    <div id="scoring-board">
-      <table>
-        <tr>
-          <th>YOUR SCORE</th>
-          <th>TIME</th>
-          <th>HIGHEST SCORE</th>
-          <th>LEVEL</th>
-        </tr>
-        <tr>
-          <td id="score">0</td>
-          <td id="time-left">00</td>
-          <td id="high-score">0</td>
-          <td id="currentLevel"></td>
-        </tr>
-      </table>
+    <div id="scoreboard-wrap">
+      <div class="scoreboard">
+        <div class="score-wrap">
+          <div class="label">YOUR <br> SCORE</div>
+          <div class="score" id="score">3</div>
+        </div>
+        <div id="timer-wrap">
+          <div id="time-left">00</div>
+          <div class="period-container">
+            <div class="period-label">LEVEL</div>
+            <div id="currentLevel"></div>
+          </div>
+        </div>
+        <div class="score-wrap">
+          <div class="label">HIGHEST SCORE</div>
+          <div class="score" id="high-score">0</div>
+        </div>
+
+      </div>
     </div>
+
     <div id="btns">
       <a href="javascript: void(0)" class="btn" id="levels-btn">
         LEVELS
@@ -137,12 +221,9 @@
       </div>
     </div>
 
-    <div id="game">
-      <!-- <img class="niceup" src="./images/niceup.png"> -->
-      <!-- <img src="./images/passing.png" id="player"> -->
-      <!-- <img src="./images/real-ball.png" class="ball"> -->
-      <div id="countdown"></div>
-    </div>
+    <div id="overlay"></div>
+    <div id="countdown"></div>
+    <div id="game"></div>
   </div>
 
   <!-- jQuery -->
@@ -159,30 +240,56 @@
     integrity='sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=='
     crossorigin='anonymous'></script>
   <script>
-    const GAME_TIME = 5;
+    const GAME_TIME = 10;
     let score = 0;
     let timeLeft = 0;
     let timer = 0;
     const highScore = { name: '', score: 0 }
     let generateBallTimer;
-    const levelSetting = LEVELS[currentLevel];
-    $("#currentLevel").text(currentLevel);
+    let levelSetting = LEVELS[currentLevel]
+    let count = 3
+    let countdownTimer;
 
+    $("#currentLevel").text(currentLevel);
     updateRankings()
 
-    // 開始按鈕
-    $('#start-btn').on('click', function () {
+    function showCountdown() {
+      count = 3
+      $('#btns').css('display', 'none')
+      $('#countdown').text(count).show()
+      $('#overlay').show()
+      countdownTimer = setInterval(() => {
+        if (count > 1) {
+          count--
+          $('#countdown').text(count).show()
+        } else {
+          clearInterval(countdownTimer)
+          $('#overlay').hide()
+          $('#countdown').text('GAME START')
+          setTimeout(() => {
+            $('#countdown').hide()
+            startGame()
+          }, 1000)
+        }
+      }, 1000);
+    }
+
+    function startGame() {
+      console.log(currentLevel)
+      levelSetting = LEVELS[currentLevel];
       // 把 player 及 滑鼠綁定事件都刪除，才不會重複綁定造成畫面問題
       resetGame()
       // 綁定球員事件
       playerMove()
       $(this).attr('disabled', true)
-      $('#btns').css('display', 'none')
+
       $('#game').css('cursor', 'none')
       score = 0;
       $('#score').text(score)
       timeLeft = GAME_TIME
       $('#time-left').text(timeLeft)
+
+      generateBall()
       generateBallTimer = setInterval(generateBall, levelSetting.generateBallInterval)
 
       timer = setInterval(function () {
@@ -194,10 +301,9 @@
           clearInterval(timer)
           clearInterval(generateBallTimer)
           $('#start-btn').attr('disabled', false)
-          // $('#levels-btn').css('display', 'block')
-          // $('#rankings-btn').css('display', 'block')
           $('#btns').css('display', 'block')
           $('#game').empty()
+          $('#game').off('mouseremove')
 
           const lowestRankingScore = rankings[rankings.length - 1].score
 
@@ -226,11 +332,10 @@
                 score = 0;
                 $('#score').text(score)
               })
-
           }
         }
       }, 1000)
-    })
+    }
 
     let playerCreated = false
     let mouseMove = false
@@ -278,8 +383,7 @@
       $('#game').off('mouseremove')
     }
 
-
-
+    $('#game').off('mouseremove')
 
 
 

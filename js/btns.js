@@ -19,3 +19,8 @@ $("#close-btn").on("click", function () {
   $("#rankings-menu").css("display", "none");
   $("#btns").css("display", "block");
 });
+
+// 開始按鈕
+$("#start-btn").on("click", function () {
+  showCountdown();
+});

@@ -7,11 +7,14 @@ let rankings = [
 ];
 
 function updateChart(newName, newScore) {
+  const newEntryIndex = rankings.findIndex(
+    (item) => item.name === newName && item.score === newScore
+  );
   const rankingsMenu = $("#rankings-menu");
   // 清除舊的資料
   rankingsMenu.find(".ranking-info").remove();
   rankings.forEach((item, index) => {
-    const isNew = item.name === newName && item.score === newScore;
+    const isNew = index === newEntryIndex;
     const rankHTML = `
         <div class="ranking-info ${isNew ? "new-entry" : ""}">
         <span class="rank">${index + 1}</span>

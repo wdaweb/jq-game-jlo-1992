@@ -1,7 +1,7 @@
 #start-btn,
 #levels-btn,
 #rankings-btn {
-  height: 13%;
+  height: 10%;
   width: 20%;
   background: linear-gradient(45deg, #e8cb49, #fcc90c 80%);
   color: transparent;
@@ -10,25 +10,25 @@
   font-weight: bold;
   font-size: 45px;
   border-radius: 40px;
-  line-height: 162%;
-  /* font-family: "Anton", sans-serif; */
+  /* line-height: 162%; */
   font-family: "Rubik", sans-serif;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* margin-top: 10px; */
   cursor: pointer;
   z-index: 1;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  /* position: relative; */
   min-width: 200px;
   text-transform: uppercase;
   overflow: hidden;
   transition: 1s;
   padding: 10px 10px;
+  /* display: inline-block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #levels-btn {
@@ -77,4 +77,59 @@
 
 .btn span:nth-child(4) {
   --n: 4;
+}
+
+@media (max-width: 600px) {
+  #btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+  #levels-btn,
+  #start-btn,
+  #rankings-btn {
+    position: static !important;
+    transform: none !important;
+    width: 80%;
+    height: auto;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .btn span {
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  #levels-btn,
+  #start-btn,
+  #rankings-btn {
+    width: 30%;
+    font-size: 35px;
+  }
+  #btns {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* 按鈕之間留空 */
+  }
+
+  #btns .btn {
+    position: static; /* 讓 flex 排列生效 */
+    width: 60%; /* 依畫面縮放寬度 */
+    height: auto; /* 高度由內容自適應 */
+    font-size: 40px; /* 字體稍微縮小 */
+  }
 }
