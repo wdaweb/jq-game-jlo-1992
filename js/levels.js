@@ -6,7 +6,7 @@ const LEVELS = {
     // generateBallInterval: 1500,
     generateBallInterval: 1000,
     ball: '<img src="./images/real-ball.png" class="ball">',
-    bomb: '<img src="../images/angrybird.png" class="ball">',
+    bomb: '<img src="./images/angrybird.png" class="ball">',
   },
   Intermediate: {
     maxBalls: 6,
@@ -15,7 +15,7 @@ const LEVELS = {
     // generateBallInterval: 1000,
     generateBallInterval: 600,
     ball: '<img src="./images/real-ball.png" class="ball">',
-    bomb: '<img src="../images/piggy.png" class="ball">',
+    bomb: '<img src="./images/piggy.png" class="ball">',
   },
   Professional: {
     maxBalls: 10,
@@ -24,7 +24,7 @@ const LEVELS = {
     // generateBallInterval: 600,
     generateBallInterval: 300,
     ball: '<img src="./images/real-ball.png" class="ball">',
-    bomb: '<img src="../images/Minions.png" class="ball">',
+    bomb: '<img src="./images/Minions.png" class="ball">',
   },
 };
 
