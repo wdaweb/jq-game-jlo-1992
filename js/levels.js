@@ -3,7 +3,6 @@ const LEVELS = {
     maxBalls: 3,
     vxRange: [2, 5],
     gravityRange: [0.5, 1],
-    // generateBallInterval: 1500,
     generateBallInterval: 1000,
     ball: '<img src="./images/real-ball.png" class="ball">',
     bomb: '<img src="./images/angrybird.png" class="ball">',
@@ -12,7 +11,6 @@ const LEVELS = {
     maxBalls: 6,
     vxRange: [4, 10],
     gravityRange: [0.8, 1.5],
-    // generateBallInterval: 1000,
     generateBallInterval: 600,
     ball: '<img src="./images/real-ball.png" class="ball">',
     bomb: '<img src="./images/piggy.png" class="ball">',
@@ -21,7 +19,6 @@ const LEVELS = {
     maxBalls: 10,
     vxRange: [6, 14],
     gravityRange: [1.2, 2.5],
-    // generateBallInterval: 600,
     generateBallInterval: 300,
     ball: '<img src="./images/real-ball.png" class="ball">',
     bomb: '<img src="./images/Minions.png" class="ball">',
@@ -44,7 +41,7 @@ function generateBall() {
     // const ball = $('<img src="./images/real-ball.png" class="ball">');
     const random = Math.round(Math.random() * 100);
     let ball;
-    if (random > 50) {
+    if (random > 70) {
       ball = $(levelSetting.ball);
     } else {
       ball = $(levelSetting.bomb);
