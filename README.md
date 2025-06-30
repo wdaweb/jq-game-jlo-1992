@@ -1,3 +1,5 @@
+[Click here](<https://jlo-1992.github.io/passing-game/volleyball.html>) to play the game.
+
 # 泰山職訓前端班 jQuery 小遊戲作業
 美化你上課完成的範例，並試著加入更多功能  
 或是發揮創意自己製作一個範例以外的小遊戲  
